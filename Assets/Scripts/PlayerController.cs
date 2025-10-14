@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletSpawner;
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
+    [SerializeField, Range(0f, 100f)] float health = 100f;
+    [SerializeField] int damage = 1;
 
     private bool canShoot = true;
 
