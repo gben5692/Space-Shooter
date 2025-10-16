@@ -27,25 +27,35 @@ public class HealthComponentEnemies : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet 9mm"))
         {
-            if (health >= 0f && health <= 100f)
+            if (shield > 0)
             {
-                print($"Health: {health}");
-                spriteRenderer.color = Color.red;
-                health -= dealDamage;
-
-                StartCoroutine(ResetColorAfterDelay(0.1f));
-
-                if (health <= 0f)
+                spriteRenderer.color = Color.blue;
+                print($"shield: {shield}");
+                shield -= dealDamage;
+                StartCoroutine(ResetColorAfterDelay(0.1f, Color.white));
+            }
+            if (shield <= 0)
+            {
+                if (health >= 0f && health <= 100f)
                 {
-                    Destroy(gameObject);
+                    spriteRenderer.color = Color.red;
+                    health -= dealDamage;
+                    print($"Health: {health}");
+
+                    StartCoroutine(ResetColorAfterDelay(0.1f, Color.white));
+
+                    if (health <= 0f)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
     }
 
-    private IEnumerator ResetColorAfterDelay(float seconds)
+    private IEnumerator ResetColorAfterDelay(float seconds, Color color)
     {
         yield return new WaitForSeconds(seconds);
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = color;
     }
 }
