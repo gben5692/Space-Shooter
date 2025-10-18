@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Bullet 9mm
+  - EnemyBullet
+  - PlayerBullet
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

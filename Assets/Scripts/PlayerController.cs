@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.Controls;
 public class PlayerController : MonoBehaviour
 {
     // Variables
+    [SerializeField, Range(0f, 100f)] float health = 100f;
+    [SerializeField, Range(0f, 100f)] float shield = 0;
     [SerializeField] KeyCode MoveLeft = KeyCode.LeftArrow;
     [SerializeField] KeyCode MoveRight = KeyCode.RightArrow;
     [SerializeField] KeyCode Shoot = KeyCode.Space;
@@ -14,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletSpawner;
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
-    [SerializeField, Range(0f, 100f)] float health = 100f;
     [SerializeField] int damage = 1;
 
     private bool canShoot = true;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -57,10 +58,18 @@ public class PlayerController : MonoBehaviour
         canShoot = false;
 
         yield return new WaitForSeconds(delay);
-
         GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
-        newBullet.SetActive(true);
-        Destroy(newBullet, 1.08f);
+        newBullet.tag = "PlayerBullet";
+        BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
+        if (bulletMovement != null )
+        {
+            bulletMovement.SetShooterTag(gameObject.tag);
+        }
+        else
+        {
+            print("The Bullet Movement Script Doesnt Exist");
+        }
+            Destroy(newBullet, 1.08f);
 
         canShoot = true;
     }
