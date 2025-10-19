@@ -583,7 +583,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facad2de1b5e91e4c8e04ccd8d774851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 7
   shield: 0
   MoveLeft: 276
   MoveRight: 275
@@ -691,7 +691,7 @@ MonoBehaviour:
   bullet: {fileID: 8127956444234220846, guid: 5a2e4496c8020544a8e96fa7dda0306f, type: 3}
   bulletSpawner: {fileID: 24522271}
   ShootDelay: 1
-  damage: 1
+  dealDamage: 1
 --- !u!1 &2070272676
 GameObject:
   m_ObjectHideFlags: 0
