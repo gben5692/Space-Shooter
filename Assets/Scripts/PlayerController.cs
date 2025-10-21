@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private bool canShoot = true;
     private SpriteRenderer spriteRenderer;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,12 +55,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator ShootAfterDelay(float delay)
     {
         canShoot = false;
-
-        yield return new WaitForSeconds(delay);
         GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
         newBullet.tag = "PlayerBullet";
         BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
-        if (bulletMovement != null )
+        if (bulletMovement != null)
         {
             bulletMovement.SetShooterTag(gameObject.tag);
         }
@@ -71,7 +66,9 @@ public class PlayerController : MonoBehaviour
         {
             print("The Bullet Movement Script Doesnt Exist");
         }
-            Destroy(newBullet, 1.08f);
+        Destroy(newBullet, 1.08f);
+        yield return new WaitForSeconds(delay);
+      
 
         canShoot = true;
     }

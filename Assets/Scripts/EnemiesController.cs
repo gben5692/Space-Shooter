@@ -10,7 +10,12 @@ public class EnemiesController : MonoBehaviour
     [SerializeField] GameObject bulletSpawner;
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
     [SerializeField] int dealDamage = 1; // how much the bullet will deal damage
+    [SerializeField] int ScoreOnKill = 1;
     private SpriteRenderer spriteRenderer;
+    private ScoreManager scoreManager;
+
+    int currentScore = 0;
+    int scoreIncoming = 0;
 
     private bool canShoot = true;
 
@@ -18,12 +23,14 @@ public class EnemiesController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         shootBullet();
+        scoreManager.AddScore(ScoreOnKill);
     }
 
     // Check if the thing that enters the collider is a bullet then take 1 damage currently it is hardcoded but will be fixed later
@@ -53,6 +60,9 @@ public class EnemiesController : MonoBehaviour
                     if (health <= 0f)
                     {
                         Destroy(gameObject);
+                        scoreIncoming = ScoreOnKill;
+                        currentScore += scoreIncoming;
+                        scoreManager.AddScore(currentScore);
                     }
                 }
             }
