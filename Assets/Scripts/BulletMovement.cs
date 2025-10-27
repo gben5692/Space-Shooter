@@ -3,8 +3,9 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
 
-    [SerializeField, Range(1, 10)] float shootSpeed;
+    [SerializeField, Range(1, 10)] float playerShootSpeed;
     [SerializeField] GameObject Bullet;
+    [SerializeField, Range(1, 10)] float enemyShootSpeed;
 
     private string shooterTag;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,12 +19,12 @@ public class BulletMovement : MonoBehaviour
     {
         if (shooterTag == "Enemy")
         {
-            transform.position += new Vector3(0, -1, 0) * shootSpeed * Time.deltaTime;
+            transform.position += new Vector3(0, -1, 0) * enemyShootSpeed * Time.deltaTime;
             enabled = true;
         }
         if (shooterTag == "Player")
         {
-            transform.position += new Vector3(0, 1, 0) * shootSpeed * Time.deltaTime;
+            transform.position += new Vector3(0, 1, 0) * playerShootSpeed * Time.deltaTime;
             enabled = true;
         }
     }

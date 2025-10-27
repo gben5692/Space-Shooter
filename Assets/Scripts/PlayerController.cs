@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour
                     {
                         Destroy(gameObject);
                         print("Game Over");
-                        QuitGame();
                     }
                 }
             }

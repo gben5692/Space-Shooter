@@ -7,16 +7,13 @@ public class EnemiesController : MonoBehaviour
     [SerializeField, Range(0f, 100f)] float health = 100f; 
     [SerializeField, Range(0f, 100f)] float shield = 0;
     [SerializeField] GameObject bullet;
-    [SerializeField] GameObject bulletSpawner;
+    [SerializeField] GameObject[] bulletSpawner;
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
     [SerializeField] int dealDamage = 1; // how much the bullet will deal damage
     [SerializeField] int ScoreOnKill = 1;
     private SpriteRenderer spriteRenderer;
     private ScoreManager scoreManager;
-
-    int currentScore = 0;
-    int scoreIncoming = 0;
-
+    
     private bool canShoot = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +27,6 @@ public class EnemiesController : MonoBehaviour
     void Update()
     {
         shootBullet();
-        scoreManager.AddScore(ScoreOnKill);
     }
 
     // Check if the thing that enters the collider is a bullet then take 1 damage currently it is hardcoded but will be fixed later
@@ -40,6 +36,8 @@ public class EnemiesController : MonoBehaviour
 
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
+            Destroy(other.gameObject);
+
             if (shield > 0)
             {
                 spriteRenderer.color = Color.blue;
@@ -59,10 +57,8 @@ public class EnemiesController : MonoBehaviour
 
                     if (health <= 0f)
                     {
+                        scoreManager.AddScore(ScoreOnKill);
                         Destroy(gameObject);
-                        scoreIncoming = ScoreOnKill;
-                        currentScore += scoreIncoming;
-                        scoreManager.AddScore(currentScore);
                     }
                 }
             }
@@ -82,20 +78,24 @@ public class EnemiesController : MonoBehaviour
         canShoot = false;
 
         yield return new WaitForSeconds(seconds);
-        GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
-        BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
-        newBullet.tag = "EnemyBullet";
 
-        if (bulletMovement != null)
+        foreach (GameObject bulletSpawner in bulletSpawner)
         {
-            bulletMovement.SetShooterTag(gameObject.tag);
-        }
-        else
-        {
-            print("The Bullet Movement Script Doesnt Exist");
-        }
+            GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
+            BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
+            newBullet.tag = "EnemyBullet";
 
-        Destroy(newBullet, 1.08f);
+            if (bulletMovement != null)
+            {
+                bulletMovement.SetShooterTag(gameObject.tag);
+            }
+            else
+            {
+                print("The Bullet Movement Script Doesnt Exist");
+            }
+
+            Destroy(newBullet, 1.08f);
+        }
 
         canShoot = true;     
     }

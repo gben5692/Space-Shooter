@@ -5,6 +5,7 @@ public class ScoreManager : MonoBehaviour
 {
 
     [SerializeField] TMP_Text Score;
+    private int totalScore = 0; // This will hold the total score
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +20,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int score)
     {
-        Score.text = $"Score: {score}";
+        totalScore += score;
+        Score.text = $"Score: {totalScore}";
     }
 }

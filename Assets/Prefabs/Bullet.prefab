@@ -101,8 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fd288fd2328a14fb549c9e98f9e979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSpeed: 8
-  Bullet: {fileID: 0}
+  playerShootSpeed: 10
+  Bullet: {fileID: 8127956444234220846}
+  enemyShootSpeed: 10
 --- !u!70 &5823947096653927279
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
