@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,12 +18,13 @@ public class PlayerController : MonoBehaviour
 
     private bool canShoot = true;
     private SpriteRenderer spriteRenderer;
-
+    private ScoreManager scoreManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        scoreManager = GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -100,6 +102,9 @@ public class PlayerController : MonoBehaviour
                     {
                         Destroy(gameObject);
                         print("Game Over");
+
+                        SceneManager.GetSceneByName("GameOver");
+                        SceneManager.LoadScene("GameOver");
                     }
                 }
             }
