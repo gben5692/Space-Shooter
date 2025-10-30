@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -15,7 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bulletSpawner;
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
     [SerializeField] int dealDamage = 1; // how much the bullet will deal damage
+    [SerializeField] AudioClip playerShootingSound;
 
+    public AudioSource audioSource;
     private bool canShoot = true;
     private SpriteRenderer spriteRenderer;
     private ScoreManager scoreManager;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         scoreManager = GetComponent<ScoreManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,6 +64,8 @@ public class PlayerController : MonoBehaviour
         GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
         newBullet.tag = "PlayerBullet";
         BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
+        audioSource.clip = playerShootingSound;
+        audioSource.Play();
         if (bulletMovement != null)
         {
             bulletMovement.SetShooterTag(gameObject.tag);

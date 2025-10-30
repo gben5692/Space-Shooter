@@ -196,6 +196,8 @@ MonoBehaviour:
   ShootDelay: 1
   dealDamage: 6
   ScoreOnKill: 10
+  enemyShootingSound: {fileID: 8300000, guid: d0e7c537197c1df47a2412236991e2a5, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &3741241859133124920
 GameObject:
   m_ObjectHideFlags: 0

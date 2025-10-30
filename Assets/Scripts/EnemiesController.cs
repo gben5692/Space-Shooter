@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class EnemiesController : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class EnemiesController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
     [SerializeField] int dealDamage = 1; // how much the bullet will deal damage
     [SerializeField] int ScoreOnKill = 1;
+    [SerializeField] AudioClip enemyShootingSound;
     private SpriteRenderer spriteRenderer;
     private ScoreManager scoreManager;
-    
+    public AudioSource audioSource;
+
     private bool canShoot = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +24,7 @@ public class EnemiesController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         scoreManager = FindFirstObjectByType<ScoreManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -84,6 +88,9 @@ public class EnemiesController : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, bulletSpawner.transform.position, Quaternion.identity);
             BulletMovement bulletMovement = newBullet.GetComponent<BulletMovement>();
             newBullet.tag = "EnemyBullet";
+
+            audioSource.clip = enemyShootingSound;
+            audioSource.Play();
 
             if (bulletMovement != null)
             {
