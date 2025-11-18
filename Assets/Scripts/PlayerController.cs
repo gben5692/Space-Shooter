@@ -2,21 +2,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     // Variables
     [SerializeField, Range(0f, 100f)] float health = 100f;
-    [SerializeField, Range(0f, 100f)] float shield = 0;
-    [SerializeField] KeyCode MoveLeft = KeyCode.LeftArrow;
-    [SerializeField] KeyCode MoveRight = KeyCode.RightArrow;
+    [SerializeField, Range(0f, 100f)] public float shield = 0;
+    [SerializeField] public KeyCode MoveLeft = KeyCode.LeftArrow;
+    [SerializeField] public KeyCode MoveRight = KeyCode.RightArrow;
     [SerializeField] KeyCode Shoot = KeyCode.Space;
     [SerializeField, Range(1f, 10f)] float speed = 1f;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletSpawner;
-    [SerializeField, Range(0f, 10f)] float ShootDelay = 1f;
+    [SerializeField, Range(0f, 10f)] public float ShootDelay = 1f;
     [SerializeField] int dealDamage = 1; // how much the bullet will deal damage
     [SerializeField] AudioClip playerShootingSound;
+    [SerializeField] TMP_Text Health;
 
     public AudioSource audioSource;
     private bool canShoot = true;
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
             ShootBullet();
         }
 
+        Health.text = $"Health: {health}";
     }
 
     void ShootBullet()

@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d7e86571b8d5b01408ed2f5f08847f5b
+  - enabled: 1
     path: Assets/Scenes/SpaceShooter.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: f0bc9e1333597294082707ff277f6d40
+  - enabled: 1
+    path: Assets/Scenes/Controls.unity
+    guid: f575615eb015b1f4295fa0123bc6bf8f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -16,8 +16,11 @@ public class EnemiesController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ScoreManager scoreManager;
     public AudioSource audioSource;
+    
+    public PlayerController playerController;
 
     private bool canShoot = true;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,7 +36,7 @@ public class EnemiesController : MonoBehaviour
         shootBullet();
     }
 
-    // Check if the thing that enters the collider is a bullet then take 1 damage currently it is hardcoded but will be fixed later
+    // Check if the thing that enters the collider is a bullet then take damage
     private void OnTriggerEnter2D(Collider2D other) 
     {
         print("i got hit");
@@ -62,6 +65,7 @@ public class EnemiesController : MonoBehaviour
                     if (health <= 0f)
                     {
                         scoreManager.AddScore(ScoreOnKill);
+
                         Destroy(gameObject);
                     }
                 }
@@ -112,4 +116,5 @@ public class EnemiesController : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         spriteRenderer.color = color;
     }
+
 }

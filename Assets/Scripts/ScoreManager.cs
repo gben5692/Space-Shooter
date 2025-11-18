@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour
     {
         totalScore += score;
         Score.text = $"Score: {totalScore}";
-
         PlayerPrefs.SetInt("Score", totalScore);
         PlayerPrefs.Save();
     }
